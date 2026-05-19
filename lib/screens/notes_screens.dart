@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../services/firebase_service.dart';
-import '../models/note_model.dart';
-import '../models/course_model.dart';
+import '../models/note_models.dart';
+import '../models/course_models.dart';
 
 class NotesScreen extends StatefulWidget {
   final FirebaseService service;
@@ -340,7 +340,7 @@ class _NotesScreenState extends State<NotesScreen> {
                                     timestamp: note.timestamp,
                                   ),
                                 );
-                                if (ctx.mounted) Navigator.pop(ctx);
+                                if (mounted) Navigator.pop(ctx);
                                 if (mounted) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(

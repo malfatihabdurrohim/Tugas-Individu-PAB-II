@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/firebase_service.dart';
-import 'notes_screen.dart';
-import 'courses_screen.dart';
+import 'notes_screens.dart';
+import 'courses_screens.dart';
 
 class HomeScreen extends StatefulWidget {
   final VoidCallback onToggleTheme;
