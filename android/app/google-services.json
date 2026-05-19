@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "271218192884",
+    "project_id": "tugas-tndividu-pab-ii",
+    "storage_bucket": "tugas-tndividu-pab-ii.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271218192884:android:5c0e9f11134f55c9bdc9a1",
+        "android_client_info": {
+          "package_name": "com.example.tugas_individu_pab2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDA0-wFDm8Z4RUrW7DdZXPJeuMAyoLBToY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
