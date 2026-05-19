@@ -3,11 +3,7 @@ class CourseModel {
   final String name;
   final String lecturer;
 
-  CourseModel({
-    required this.id,
-    required this.name,
-    required this.lecturer,
-  });
+  CourseModel({required this.id, required this.name, required this.lecturer});
 
   factory CourseModel.fromMap(String id, Map<dynamic, dynamic> map) {
     return CourseModel(
@@ -18,9 +14,6 @@ class CourseModel {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'lecturer': lecturer,
-    };
+    return {'name': name, 'lecturer': lecturer};
   }
 }
