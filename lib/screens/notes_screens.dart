@@ -35,14 +35,16 @@ class _NotesScreenState extends State<NotesScreen> {
 
     setState(() => _isLoading = true);
     try {
-      await widget.service.addNote(NoteModel(
-        id: '',
-        courseId: _selectedCourse!.id,
-        courseName: _selectedCourse!.name,
-        title: _titleCtrl.text.trim(),
-        content: _contentCtrl.text.trim(),
-        timestamp: DateTime.now().millisecondsSinceEpoch ~/ 1000,
-      ));
+      await widget.service.addNote(
+        NoteModel(
+          id: '',
+          courseId: _selectedCourse!.id,
+          courseName: _selectedCourse!.name,
+          title: _titleCtrl.text.trim(),
+          content: _contentCtrl.text.trim(),
+          timestamp: DateTime.now().millisecondsSinceEpoch ~/ 1000,
+        ),
+      );
       _titleCtrl.clear();
       _contentCtrl.clear();
       setState(() => _selectedCourse = null);
@@ -58,8 +60,9 @@ class _NotesScreenState extends State<NotesScreen> {
             ),
             backgroundColor: Colors.green.shade600,
             behavior: SnackBarBehavior.floating,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
         );
       }
@@ -82,12 +85,12 @@ class _NotesScreenState extends State<NotesScreen> {
     if (courses.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text(
-              'Tambahkan mata kuliah terlebih dahulu!'),
+          content: const Text('Tambahkan mata kuliah terlebih dahulu!'),
           backgroundColor: Colors.orange.shade600,
           behavior: SnackBarBehavior.floating,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
         ),
       );
       return;
@@ -97,7 +100,8 @@ class _NotesScreenState extends State<NotesScreen> {
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, setSheetState) => Padding(
           padding: EdgeInsets.only(
@@ -127,8 +131,8 @@ class _NotesScreenState extends State<NotesScreen> {
                   Text(
                     'Tambah Catatan',
                     style: Theme.of(ctx).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 20),
                   // Dropdown Mata Kuliah
@@ -138,14 +142,19 @@ class _NotesScreenState extends State<NotesScreen> {
                       labelText: 'Pilih Mata Kuliah',
                       prefixIcon: const Icon(Icons.book_rounded),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                     items: courses
-                        .map((c) => DropdownMenuItem(
-                              value: c,
-                              child: Text(c.name,
-                                  overflow: TextOverflow.ellipsis),
-                            ))
+                        .map(
+                          (c) => DropdownMenuItem(
+                            value: c,
+                            child: Text(
+                              c.name,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        )
                         .toList(),
                     onChanged: (v) {
                       setSheetState(() => _selectedCourse = v);
@@ -160,7 +169,8 @@ class _NotesScreenState extends State<NotesScreen> {
                       labelText: 'Judul Catatan',
                       prefixIcon: const Icon(Icons.title_rounded),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                     validator: (v) =>
                         (v == null || v.trim().isEmpty) ? 'Wajib diisi' : null,
@@ -179,7 +189,8 @@ class _NotesScreenState extends State<NotesScreen> {
                         child: Icon(Icons.notes_rounded),
                       ),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                     validator: (v) =>
                         (v == null || v.trim().isEmpty) ? 'Wajib diisi' : null,
@@ -202,14 +213,16 @@ class _NotesScreenState extends State<NotesScreen> {
                           ? const SizedBox(
                               width: 18,
                               height: 18,
-                              child:
-                                  CircularProgressIndicator(strokeWidth: 2),
+                              child: CircularProgressIndicator(strokeWidth: 2),
                             )
                           : const Icon(Icons.save_rounded),
-                      label: Text(_isLoading ? 'Menyimpan...' : 'Simpan Catatan'),
+                      label: Text(
+                        _isLoading ? 'Menyimpan...' : 'Simpan Catatan',
+                      ),
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                     ),
                   ),
@@ -237,7 +250,8 @@ class _NotesScreenState extends State<NotesScreen> {
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, setSheetState) => Padding(
           padding: EdgeInsets.only(
@@ -267,8 +281,8 @@ class _NotesScreenState extends State<NotesScreen> {
                   Text(
                     'Edit Catatan',
                     style: Theme.of(ctx).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 20),
                   DropdownButtonFormField<CourseModel>(
@@ -277,14 +291,19 @@ class _NotesScreenState extends State<NotesScreen> {
                       labelText: 'Pilih Mata Kuliah',
                       prefixIcon: const Icon(Icons.book_rounded),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                     items: courses
-                        .map((c) => DropdownMenuItem(
-                              value: c,
-                              child: Text(c.name,
-                                  overflow: TextOverflow.ellipsis),
-                            ))
+                        .map(
+                          (c) => DropdownMenuItem(
+                            value: c,
+                            child: Text(
+                              c.name,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        )
                         .toList(),
                     onChanged: (v) => setSheetState(() => editCourse = v),
                     validator: (v) => v == null ? 'Pilih mata kuliah' : null,
@@ -296,7 +315,8 @@ class _NotesScreenState extends State<NotesScreen> {
                       labelText: 'Judul Catatan',
                       prefixIcon: const Icon(Icons.title_rounded),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                     validator: (v) =>
                         (v == null || v.trim().isEmpty) ? 'Wajib diisi' : null,
@@ -313,7 +333,8 @@ class _NotesScreenState extends State<NotesScreen> {
                         child: Icon(Icons.notes_rounded),
                       ),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                     validator: (v) =>
                         (v == null || v.trim().isEmpty) ? 'Wajib diisi' : null,
@@ -345,12 +366,13 @@ class _NotesScreenState extends State<NotesScreen> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: const Text(
-                                          'Catatan berhasil diupdate!'),
+                                        'Catatan berhasil diupdate!',
+                                      ),
                                       backgroundColor: Colors.green.shade600,
                                       behavior: SnackBarBehavior.floating,
                                       shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
                                     ),
                                   );
                                 }
@@ -368,7 +390,8 @@ class _NotesScreenState extends State<NotesScreen> {
                       label: Text(saving ? 'Menyimpan...' : 'Update Catatan'),
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                     ),
                   ),
@@ -390,13 +413,13 @@ class _NotesScreenState extends State<NotesScreen> {
         content: const Text('Apakah kamu yakin ingin menghapus catatan ini?'),
         actions: [
           TextButton(
-              onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('Batal')),
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Batal'),
+          ),
           ElevatedButton(
             onPressed: () => Navigator.pop(ctx, true),
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            child:
-                const Text('Hapus', style: TextStyle(color: Colors.white)),
+            child: const Text('Hapus', style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -409,8 +432,9 @@ class _NotesScreenState extends State<NotesScreen> {
             content: const Text('Catatan dihapus'),
             backgroundColor: Colors.red.shade600,
             behavior: SnackBarBehavior.floating,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
         );
       }
@@ -446,10 +470,12 @@ class _NotesScreenState extends State<NotesScreen> {
             if (_searchQuery.isNotEmpty) {
               final q = _searchQuery.toLowerCase();
               notes = notes
-                  .where((n) =>
-                      n.title.toLowerCase().contains(q) ||
-                      n.content.toLowerCase().contains(q) ||
-                      n.courseName.toLowerCase().contains(q))
+                  .where(
+                    (n) =>
+                        n.title.toLowerCase().contains(q) ||
+                        n.content.toLowerCase().contains(q) ||
+                        n.courseName.toLowerCase().contains(q),
+                  )
                   .toList();
             }
 
@@ -463,8 +489,7 @@ class _NotesScreenState extends State<NotesScreen> {
                       children: [
                         // Search Field
                         TextField(
-                          onChanged: (v) =>
-                              setState(() => _searchQuery = v),
+                          onChanged: (v) => setState(() => _searchQuery = v),
                           decoration: InputDecoration(
                             hintText: 'Cari catatan...',
                             prefixIcon: const Icon(Icons.search_rounded),
@@ -481,7 +506,9 @@ class _NotesScreenState extends State<NotesScreen> {
                             ),
                             filled: true,
                             contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 12),
+                              horizontal: 16,
+                              vertical: 12,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 10),
@@ -498,12 +525,14 @@ class _NotesScreenState extends State<NotesScreen> {
                                   onSelected: () =>
                                       setState(() => _filterCourseId = ''),
                                 ),
-                                ...courses.map((c) => _FilterChip(
-                                      label: c.name,
-                                      selected: _filterCourseId == c.id,
-                                      onSelected: () => setState(
-                                          () => _filterCourseId = c.id),
-                                    )),
+                                ...courses.map(
+                                  (c) => _FilterChip(
+                                    label: c.name,
+                                    selected: _filterCourseId == c.id,
+                                    onSelected: () =>
+                                        setState(() => _filterCourseId = c.id),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -518,8 +547,7 @@ class _NotesScreenState extends State<NotesScreen> {
                         Text(
                           '${notes.length} Catatan',
                           style: theme.textTheme.bodySmall?.copyWith(
-                            color:
-                                theme.colorScheme.onSurface.withOpacity(0.6),
+                            color: theme.colorScheme.onSurface.withOpacity(0.6),
                           ),
                         ),
                       ],
@@ -533,10 +561,13 @@ class _NotesScreenState extends State<NotesScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.note_alt_outlined,
-                                    size: 80,
-                                    color: theme.colorScheme.primary
-                                        .withOpacity(0.4)),
+                                Icon(
+                                  Icons.note_alt_outlined,
+                                  size: 80,
+                                  color: theme.colorScheme.primary.withOpacity(
+                                    0.4,
+                                  ),
+                                ),
                                 const SizedBox(height: 16),
                                 Text(
                                   _searchQuery.isNotEmpty
@@ -565,8 +596,7 @@ class _NotesScreenState extends State<NotesScreen> {
                               final note = notes[i];
                               return _NoteCard(
                                 note: note,
-                                onEdit: () =>
-                                    _showEditNoteSheet(note, courses),
+                                onEdit: () => _showEditNoteSheet(note, courses),
                                 onDelete: () => _confirmDelete(note.id),
                               );
                             },
@@ -667,9 +697,7 @@ class _NoteCard extends StatelessWidget {
             offset: const Offset(0, 4),
           ),
         ],
-        border: Border(
-          left: BorderSide(color: color, width: 4),
-        ),
+        border: Border(left: BorderSide(color: color, width: 4)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -680,8 +708,10 @@ class _NoteCard extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: color.withOpacity(0.12),
                     borderRadius: BorderRadius.circular(20),
