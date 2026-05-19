@@ -28,29 +28,32 @@ class _CoursesScreenState extends State<CoursesScreen> {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _isLoading = true);
     try {
-      await widget.service.addCourse(CourseModel(
-        id: '',
-        name: _nameCtrl.text.trim(),
-        lecturer: _lecturerCtrl.text.trim(),
-      ));
+      await widget.service.addCourse(
+        CourseModel(
+          id: '',
+          name: _nameCtrl.text.trim(),
+          lecturer: _lecturerCtrl.text.trim(),
+        ),
+      );
       _nameCtrl.clear();
       _lecturerCtrl.clear();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Row(
-                children: const [
-                  Icon(Icons.check_circle, color: Colors.white),
-                  SizedBox(width: 8),
-                  Text('Mata kuliah berhasil ditambahkan!'),
-                ],
-              ),
-              backgroundColor: Colors.green.shade600,
-              behavior: SnackBarBehavior.floating,
-              shape:
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          SnackBar(
+            content: Row(
+              children: const [
+                Icon(Icons.check_circle, color: Colors.white),
+                SizedBox(width: 8),
+                Text('Mata kuliah berhasil ditambahkan!'),
+              ],
             ),
-          );
+            backgroundColor: Colors.green.shade600,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        );
       }
     } catch (e) {
       if (mounted) {
@@ -101,9 +104,9 @@ class _CoursesScreenState extends State<CoursesScreen> {
               ),
               Text(
                 'Tambah Mata Kuliah',
-                style: Theme.of(ctx).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: Theme.of(
+                  ctx,
+                ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 20),
               TextFormField(
@@ -112,7 +115,8 @@ class _CoursesScreenState extends State<CoursesScreen> {
                   labelText: 'Nama Mata Kuliah',
                   prefixIcon: const Icon(Icons.book_rounded),
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12)),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 validator: (v) =>
                     (v == null || v.trim().isEmpty) ? 'Wajib diisi' : null,
@@ -125,7 +129,8 @@ class _CoursesScreenState extends State<CoursesScreen> {
                   labelText: 'Nama Dosen',
                   prefixIcon: const Icon(Icons.person_rounded),
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12)),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 validator: (v) =>
                     (v == null || v.trim().isEmpty) ? 'Wajib diisi' : null,
@@ -154,7 +159,8 @@ class _CoursesScreenState extends State<CoursesScreen> {
                   label: Text(_isLoading ? 'Menyimpan...' : 'Simpan'),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                 ),
               ),
@@ -181,7 +187,11 @@ class _CoursesScreenState extends State<CoursesScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.error_outline, size: 64, color: Colors.red.shade400),
+                  Icon(
+                    Icons.error_outline,
+                    size: 64,
+                    color: Colors.red.shade400,
+                  ),
                   const SizedBox(height: 16),
                   Text('Error: ${snapshot.error}'),
                 ],
@@ -196,8 +206,11 @@ class _CoursesScreenState extends State<CoursesScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.library_books_outlined,
-                      size: 80, color: theme.colorScheme.primary.withOpacity(0.4)),
+                  Icon(
+                    Icons.library_books_outlined,
+                    size: 80,
+                    color: theme.colorScheme.primary.withOpacity(0.4),
+                  ),
                   const SizedBox(height: 16),
                   Text(
                     'Belum ada mata kuliah',
@@ -222,17 +235,23 @@ class _CoursesScreenState extends State<CoursesScreen> {
               // Header info
               Container(
                 margin: const EdgeInsets.all(16),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
                 decoration: BoxDecoration(
                   color: theme.colorScheme.primary.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                      color: theme.colorScheme.primary.withOpacity(0.3)),
+                    color: theme.colorScheme.primary.withOpacity(0.3),
+                  ),
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.menu_book_rounded,
-                        color: theme.colorScheme.primary),
+                    Icon(
+                      Icons.menu_book_rounded,
+                      color: theme.colorScheme.primary,
+                    ),
                     const SizedBox(width: 10),
                     Text(
                       '${courses.length} Mata Kuliah Terdaftar',
@@ -329,13 +348,17 @@ class _CourseCard extends StatelessWidget {
         ),
         subtitle: Row(
           children: [
-            Icon(Icons.person_outline, size: 14,
-                color: theme.colorScheme.onSurface.withOpacity(0.6)),
+            Icon(
+              Icons.person_outline,
+              size: 14,
+              color: theme.colorScheme.onSurface.withOpacity(0.6),
+            ),
             const SizedBox(width: 4),
             Text(
               course.lecturer,
               style: TextStyle(
-                  color: theme.colorScheme.onSurface.withOpacity(0.6)),
+                color: theme.colorScheme.onSurface.withOpacity(0.6),
+              ),
             ),
           ],
         ),
