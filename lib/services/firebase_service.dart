@@ -23,10 +23,12 @@ class FirebaseService {
       if (data == null) return [];
       final map = Map<dynamic, dynamic>.from(data as Map);
       return map.entries
-          .map((e) => CourseModel.fromMap(
-                e.key.toString(),
-                Map<dynamic, dynamic>.from(e.value as Map),
-              ))
+          .map(
+            (e) => CourseModel.fromMap(
+              e.key.toString(),
+              Map<dynamic, dynamic>.from(e.value as Map),
+            ),
+          )
           .toList()
         ..sort((a, b) => a.name.compareTo(b.name));
     });
@@ -56,10 +58,12 @@ class FirebaseService {
       if (data == null) return [];
       final map = Map<dynamic, dynamic>.from(data as Map);
       return map.entries
-          .map((e) => NoteModel.fromMap(
-                e.key.toString(),
-                Map<dynamic, dynamic>.from(e.value as Map),
-              ))
+          .map(
+            (e) => NoteModel.fromMap(
+              e.key.toString(),
+              Map<dynamic, dynamic>.from(e.value as Map),
+            ),
+          )
           .toList()
         ..sort((a, b) => b.timestamp.compareTo(a.timestamp));
     });
